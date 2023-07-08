@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Tel</th>
+            <th>Email</th>
+            <th>Last Visit Date</th>
+            <th>Next Visit Date</th>
+            <th>Note</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.tel }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.lastVisitDate | date }}</td>
+            <td>{{ customer.nextVisitDate | date }}</td>
+            <td>{{ customer.note }}</td>
+            <td>
+              <button (click)="deleteCustomer(customer.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table  >
+        <thead>
+          <tr>
+            <th >ID</th>
+            <th>Name</th>
+            <th >Tel</th>
+            <th >Email</th>
+            <th>Last Visit Date</th>
+            <th>Next Visit Date</th>
+            <th>Note</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.tel }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.lastVisitDate | date }}</td>
+            <td>{{ customer.netxVisitDate | date }}</td>
+            <td>{{ customer.note }}</td>
+            <td>
+              <button (click)="deleteCustomer(customer.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <hr>
+      
+      <h2>Add Customer</h2>
+      
+      <form (submit)="saveCustomer()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newCustomer.name" required>
+        <input type="text" id="name"                                [(ngModel)]="newCustomer.name" [ngModelOptions]="{standalone: true}" required>
+      
+      
+      
+        <label for="tel">Tel:</label>
+        <input type="text" id="tel"   [(ngModel)]="newCustomer.tel"[ngModelOptions]="{standalone: true}" required>
+      
+       
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="newCustomer.email" [ngModelOptions]="{standalone: true}" required>
+      
+        <label for="lastVisitDate">Last Visit Date:</label>
+        <input type="date" id="lastVisitDate" [(ngModel)]="newCustomer.lastVisitDate" required>
+      
+        <label for="netxVisitDate">Next Visit Date:</label>
+        <input type="date" id="netxVisitDate" [(ngModel)]="newCustomer.netxVisitDate" required>
+      
+        <label for="note">Note:</label>
+        <textarea id="note" [(ngModel)]="newCustomer.note" [ngModelOptions]="{standalone: true}"></textarea>
+      
+        <button type="submit">Save</button>
+      </form>
+      
+
+</body>
+</html>

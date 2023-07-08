@@ -1,0 +1,62 @@
+
+
+<h2>Agregar cliente</h2>
+
+<form (submit)="saveCustomer()">
+  <label for="name">Nombre:</label>
+ 
+  <input type="text" id="name"  [(ngModel)]="newCustomer.name" [ngModelOptions]="{standalone: true}" required>
+
+<br>
+
+  <label for="tel">Tel:</label>
+  <input type="text" id="tel"   [(ngModel)]="newCustomer.tel"[ngModelOptions]="{standalone: true}" required>
+<br>
+ 
+  <label for="email">Email:</label>
+  <input type="email" id="email" [(ngModel)]="newCustomer.email" [ngModelOptions]="{standalone: true}" required>
+<br>
+  <label for="lastVisitDate">Ultima visita:</label>
+  <input type="date" id="lastVisitDate" [(ngModel)]="newCustomer.lastVisitDate" required>
+<br>
+  <label for="netxVisitDate">Proxima:</label>
+  <input type="date" id="netxVisitDate" [(ngModel)]="newCustomer.nextVisitDate" required>
+<br>
+  <label for="note">Notas:</label>
+  <textarea id="note" [(ngModel)]="newCustomer.note" [ngModelOptions]="{standalone: true}"></textarea>
+<br>
+  <button class="btn btn-primary" type="submit">Guardar</button>
+</form>
+<br>
+<table class="table" >
+  <caption>Datos de cliente</caption>
+  <thead class="thead-dark">
+    <tr >
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Tel</th>
+      <th>Email</th>
+      <th>Ultima visita</th>
+      <th>Proxima</th>
+      <th>Notas</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.tel }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.lastVisitDate | date }}</td>
+      <td>{{ customer.nextVisitDate | date }}</td>
+      <td>{{ customer.note }}</td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteCustomer(customer.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<hr>
