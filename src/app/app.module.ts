@@ -3,18 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomerComponent } from './customer/customer.component';
+import { CustomerComponent } from './home/customer.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AgregarComponent } from './agregar/agregar.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerComponent,
-    AgregarComponent
+    FooterComponent,
+    HeaderComponent,
+   
   ],
   imports: [
     BrowserModule,
