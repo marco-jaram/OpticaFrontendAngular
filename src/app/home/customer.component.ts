@@ -1,24 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-
-interface Customer {
-  id: number;
-  name: string;
-  tel: string;
-  email: string;
-  lastVisitDate: Date;
-  nextVisitDate: Date;
-  note: string;
-}
-
+import { CustomerService } from '../service/customer.service';
+import { Customer } from '../models/customer';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
-  apiUrl = 'http://localhost:8080/api/cliente';
   customers: Customer[] = [];
   newCustomer: Customer = {
     id: 0,
@@ -30,22 +18,22 @@ export class CustomerComponent implements OnInit {
     note: ''
   };
 
-  
-  selectedCustomerId: number | null = null; 
-  constructor(private http: HttpClient) { }
+  selectedCustomerId: number | null = null;
+
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.getCustomers();
   }
 
   getCustomers(): void {
-    this.http.get<Customer[]>(this.apiUrl).subscribe(customers => {
+    this.customerService.getCustomers().subscribe(customers => {
       this.customers = customers;
     });
   }
 
   saveCustomer(): void {
-    this.http.post<Customer>(this.apiUrl, this.newCustomer).subscribe(customer => {
+    this.customerService.saveCustomer(this.newCustomer).subscribe(customer => {
       this.customers.push(customer);
       this.newCustomer = {
         id: 0,
@@ -65,20 +53,18 @@ export class CustomerComponent implements OnInit {
       this.performDelete();
     } else {
       this.selectedCustomerId = null;
-      console.log("Eliminación cancelOpticaCentroCrud-Frontendlada");
+      console.log("Eliminación cancelada");
     }
   }
 
   performDelete(): void {
     if (this.selectedCustomerId !== null) {
-      this.http.delete<void>(`${this.apiUrl}/${this.selectedCustomerId}`).subscribe(() => {
+      this.customerService.deleteCustomer(this.selectedCustomerId).subscribe(() => {
         this.customers = this.customers.filter(customer => customer.id !== this.selectedCustomerId);
-        this.getCustomers(); // Actualizar la lista de clientes después de la eliminación
+        this.getCustomers();
       });
       this.selectedCustomerId = null;
       console.log("Cliente eliminado");
     }
   }
-  
 }
-
